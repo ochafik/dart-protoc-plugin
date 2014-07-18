@@ -12,6 +12,7 @@ class FileGenerator extends ProtobufContainer {
   final List<EnumGenerator> enumGenerators = <EnumGenerator>[];
   final List<MessageGenerator> messageGenerators = <MessageGenerator>[];
   final List<ExtensionGenerator> extensionGenerators = <ExtensionGenerator>[];
+  final List<ServiceGenerator> serviceGenerators = <ServiceGenerator>[];
 
   FileGenerator(this._fileDescriptor, this._parent, this._context) {
     _context.register(this);
@@ -25,6 +26,9 @@ class FileGenerator extends ProtobufContainer {
     for (FieldDescriptorProto extension in _fileDescriptor.extension) {
       extensionGenerators.add(
           new ExtensionGenerator(extension, this, _context));
+    }
+    for (ServiceDescriptorProto x in _fileDescriptor.service) {
+      serviceGenerators.add(new ServiceGenerator(x, this, _context));
     }
   }
 

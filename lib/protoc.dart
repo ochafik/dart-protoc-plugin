@@ -19,4 +19,5 @@ part 'message_generator.dart';
 part 'options.dart';
 part 'output_config.dart';
 part 'protobuf_field.dart';
+part 'service_generator.dart';
 part 'writer.dart';
