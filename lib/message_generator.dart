@@ -90,7 +90,29 @@ class MessageGenerator extends ProtobufContainer {
       m.generate(out);
     }
 
-    out.addBlock('class ${classname} extends GeneratedMessage${SP}{',
+
+//class Url extends GeneratedMessage with UrlMixin {
+//  Url() : super();
+//  Url.fromBuffer(List<int> i, [ExtensionRegistry r = ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+//  Url.fromJson(String i, [ExtensionRegistry r = ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+//  Url clone() => new Url()..mergeFromMessage(this);
+//}
+//abstract class UrlMixin {
+//  
+//}
+    out.addBlock('class ${classname} extends GeneratedMessage with ${classname}Mixin${SP}{',
+        '}', () {
+      out.println('${classname}()${SP}:${SP}super();');
+      out.println('${classname}.fromBuffer(List<int> i,'
+          '${SP}[ExtensionRegistry r = ExtensionRegistry.EMPTY])'
+          '${SP}:${SP}super.fromBuffer(i,${SP}r);');
+      out.println('${classname}.fromJson(String i,'
+          '${SP}[ExtensionRegistry r = ExtensionRegistry.EMPTY])'
+          '${SP}:${SP}super.fromJson(i,${SP}r);');
+      out.println('${classname} clone()${SP}=>'
+          '${SP}new ${classname}()..mergeFromMessage(this);');
+    });
+    out.addBlock('abstract class ${classname}Mixin {',
         '}', ()
       {
       out.addBlock(
@@ -159,16 +181,6 @@ class MessageGenerator extends ProtobufContainer {
       }
 
       out.println();
-
-      out.println('${classname}()${SP}:${SP}super();');
-      out.println('${classname}.fromBuffer(List<int> i,'
-          '${SP}[ExtensionRegistry r = ExtensionRegistry.EMPTY])'
-          '${SP}:${SP}super.fromBuffer(i,${SP}r);');
-      out.println('${classname}.fromJson(String i,'
-          '${SP}[ExtensionRegistry r = ExtensionRegistry.EMPTY])'
-          '${SP}:${SP}super.fromJson(i,${SP}r);');
-      out.println('${classname} clone()${SP}=>'
-          '${SP}new ${classname}()..mergeFromMessage(this);');
 
       out.println('BuilderInfo get info_${SP}=>${SP}_i;');
 
