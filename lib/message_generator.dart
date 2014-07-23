@@ -90,16 +90,6 @@ class MessageGenerator extends ProtobufContainer {
       m.generate(out);
     }
 
-
-//class Url extends GeneratedMessage with UrlMixin {
-//  Url() : super();
-//  Url.fromBuffer(List<int> i, [ExtensionRegistry r = ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-//  Url.fromJson(String i, [ExtensionRegistry r = ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-//  Url clone() => new Url()..mergeFromMessage(this);
-//}
-//abstract class UrlMixin {
-//  
-//}
     out.addBlock('class ${classname} extends GeneratedMessage with ${classname}Mixin${SP}{',
         '}', () {
       out.println('${classname}()${SP}:${SP}super();');
